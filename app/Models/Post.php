@@ -2,22 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Facades\File;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-class Post
+class Post extends Model
 {
-    public static function all()
-    {
-        $files = File::files(resource_path("views/posts/"));
-        return array_map(fn($file) => $file->getContents(), $files);
-    }
+    use HasFactory;
 
-    public static function find($slug)
-    {
-        if (! file_exists($path = resource_path("views/posts/{$slug}.html"))) {
-            abort(404);
-        }
-        return cache()->remember("posts.$slug", 1200, fn () => file_get_contents($path));
-    }
+    protected $fillable = ['title', 'excerpt', 'body'];
 
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 }

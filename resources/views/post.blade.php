@@ -1,9 +1,10 @@
-<!DOCTYPE html>
-<head>
-    <title>My Blog</title>
-    <link rel="stylesheet" href="/style.css">
-</head>
-<body>
-    {!! $post !!}
-    <a href="/">back</a> 
-</body>
+<x-layout>
+    <h1>{{ $post->title }}</h1>
+    <p>
+        <a href="categories/{{ $post->category->slug }}">{{ $post->category->name }}</a>
+    </p>
+    <div>
+        {!! $post->body !!}
+    </div>
+    <a href="/">back</a>
+</x-layout>
