@@ -14,6 +14,24 @@ class Post extends Model
     // default lazy loading
     //  protected $with = ['category', 'author'];
 
+    // Call this function like this ( Post::all()->filter()->get() )
+    public function scopeFilter($query, array $filters)
+    {
+        if (isset($filters['search'])) {
+            $query
+            ->where('title', 'like', '%' . $filters['search'] . '%')
+            ->orWhere('body', 'like', '%' . $filters['search'] . '%');
+        }
+
+        // Alt method
+
+        // $query->when($filters['search'] ?? false, function ($query, $search){
+        //     $query
+        //     ->where('title', 'like', '%' . $search . '%')
+        //     ->orWhere('body', 'like', '%' . $search . '%');
+        // });
+    }
+
     public function category()
     {
         return $this->belongsTo(Category::class);
@@ -23,5 +41,4 @@ class Post extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
-    
 }
