@@ -14,13 +14,13 @@ class Post extends Model
     // default lazy loading
     //  protected $with = ['category', 'author'];
 
-    // Call this function like this ( Post::all()->filter()->get() )
+    // Call this function like this ( Post::fetchSmt()->filter()->get() )
     public function scopeFilter($query, array $filters)
     {
         if (isset($filters['search'])) {
             $query
-            ->where('title', 'like', '%' . $filters['search'] . '%')
-            ->orWhere('body', 'like', '%' . $filters['search'] . '%');
+                ->where('title', 'like', '%' . $filters['search'] . '%')
+                ->orWhere('body', 'like', '%' . $filters['search'] . '%');
         }
 
         // Alt method
@@ -29,6 +29,18 @@ class Post extends Model
         //     $query
         //     ->where('title', 'like', '%' . $search . '%')
         //     ->orWhere('body', 'like', '%' . $search . '%');
+        // });
+
+        if (isset($filters['category'])) {
+            $query->whereHas('category', fn ($query) => 
+                $query->where('slug', $filters['category'])
+            );
+        }
+
+        // Alt method
+
+        // $query->when($filters['search'] ?? false, function ($query, $category){
+        //     $query->whereHas('category', fn ($query) => $query->where('slug', $category)
         // });
     }
 
