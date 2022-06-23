@@ -39,8 +39,20 @@ class Post extends Model
 
         // Alt method
 
-        // $query->when($filters['search'] ?? false, function ($query, $category){
+        // $query->when($filters['category'] ?? false, function ($query, $category){
         //     $query->whereHas('category', fn ($query) => $query->where('slug', $category)
+        // });
+
+        if (isset($filters['author'])) {
+            $query->whereHas('author', fn ($query) => 
+                $query->where('username', $filters['author'])
+            );
+        }
+
+        // Alt method
+
+        // $query->when($filters['author'] ?? false, function ($query, $author){
+        //     $query->whereHas('author', fn ($query) => $query->where('username', $author)
         // });
     }
 

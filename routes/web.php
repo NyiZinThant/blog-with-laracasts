@@ -20,9 +20,3 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [PostController::class, "index"])->name("home");
 
 Route::get("/posts/{post:slug}", [PostController::class, "show"]);
-
-Route::get("/authors/{user:username}", function (User $user) {
-    return view("posts", [
-        "posts" => $user->posts->load(['category', 'author']),
-    ]);
-});
