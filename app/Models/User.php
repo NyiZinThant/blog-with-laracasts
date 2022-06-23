@@ -17,14 +17,10 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+    protected $guarded = [];
 
     /**
-     * The attributes that should be hidden for serialization.
+     * the attributes that should be hidden for serialization.
      *
      * @var array<int, string>
      */
@@ -41,6 +37,21 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    // Accesser
+    // public function getUsernameAttribute($username)
+    // {
+    //     return ucwords($username);   
+    // }
+
+
+    // Mutator
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['password'] = bcrypt($password);
+    }
+    
 
     public function posts()
     {
