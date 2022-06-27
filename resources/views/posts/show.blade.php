@@ -55,7 +55,7 @@
                 <section class="col-span-6 col-start-5 mt-10 space-y-6">
                     @auth
                         <x-card>
-                            <form action="#" method="post">
+                            <form action="/posts/{{ $post->id }}/comments" method="post">
                                 @csrf
                                 <header class="flex items-center">
                                     <img src="https://i.pravatar.cc/60?u={{ auth()->user()->id }}" height="40"
@@ -72,6 +72,10 @@
                                 </div>
                             </form>
                         </x-card>
+                    @else
+                        <p class="font-semibold">
+                            <a href="/register" class="hover:underline">Register</a> Or <a href="/login" class="hover:underline">Login</a> to leave a comment.
+                        </p>
                     @endauth
                     @foreach ($post->comments as $comment)
                         <x-post-comment :comment="$comment" />
