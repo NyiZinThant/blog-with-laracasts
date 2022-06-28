@@ -16,6 +16,18 @@ use App\Http\Controllers\PostCommentController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('ping', function () {
+    $mailchimp = new \MailchimpMarketing\ApiClient();
+    $mailchimp->setConfig([
+        'apiKey' => config('services.mailchimp.key'),
+        'server' => 'us13'
+    ]);
+
+    $response = $mailchimp->lists->addListMember('6215177d9e',[
+        "email_address" => "darksideshm@gmail.com",
+        "status" => "subscribed",
+    ]);
+});
 
 Route::get('/', [PostController::class, "index"])->name("home");
 

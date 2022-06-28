@@ -5,6 +5,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 <script src="//unpkg.com/alpinejs" defer></script>
+<style>
+    html{
+        scroll-behavior: smooth;
+    }
+</style>
 
 <body style="font-family: Open Sans, sans-serif">
     <section class="px-6 py-8">
@@ -27,7 +32,7 @@
                     <a href="/login" class="text-xs font-bold uppercase ml-3">Login</a>
                 @endauth
 
-                <a href="#"
+                <a href="#newsletter"
                     class="bg-blue-500 ml-3 rounded-full text-xs font-semibold text-white uppercase py-3 px-5">
                     Subscribe for Updates
                 </a>
@@ -42,7 +47,7 @@
             <p class="text-sm mt-3">Promise to keep the inbox clean. No bugs.</p>
 
             <div class="mt-10">
-                <div class="relative inline-block mx-auto lg:bg-gray-200 rounded-full">
+                <div id="newsletter" class="relative inline-block mx-auto lg:bg-gray-200 rounded-full">
 
                     <form method="POST" action="#" class="lg:flex text-sm">
                         <div class="lg:py-3 lg:px-5 flex items-center">
