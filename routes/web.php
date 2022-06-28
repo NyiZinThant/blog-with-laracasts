@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\PostCommentController;
 
 /*
@@ -16,25 +17,18 @@ use App\Http\Controllers\PostCommentController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('ping', function () {
-    $mailchimp = new \MailchimpMarketing\ApiClient();
-    $mailchimp->setConfig([
-        'apiKey' => config('services.mailchimp.key'),
-        'server' => 'us13'
-    ]);
 
-    $response = $mailchimp->lists->addListMember('6215177d9e',[
-        "email_address" => "darksideshm@gmail.com",
-        "status" => "subscribed",
-    ]);
-});
-
+// Posts
 Route::get('/', [PostController::class, "index"])->name("home");
 
 Route::get("/posts/{post:slug}", [PostController::class, "show"]);
 
 Route::post("/posts/{post}/comments", [PostCommentController::class, "store"]);
 
+// Newsletter
+Route::post('newsletter', NewsletterController::class);
+
+// Auth
 Route::get("/register", [RegisterController::class, "create"])->middleware('guest');
 
 Route::post("/register", [RegisterController::class, "store"])->middleware('guest');

@@ -32,5 +32,9 @@ return [
     ],
     'mailchimp' => [
         'key' => env('MAILCHIMP_KEY'),
+        'lists' => [
+            'subscribers' => '6215177d9e',
+            // use direct or put list_id into the .env and use with env('name')
+        ]
     ]
 ];
