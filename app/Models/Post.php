@@ -10,7 +10,7 @@ class Post extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'excerpt', 'body'];
+    protected $guarded = [];
 
     // default lazy loading
     //  protected $with = ['category', 'author'];
