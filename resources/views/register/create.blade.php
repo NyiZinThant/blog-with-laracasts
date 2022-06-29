@@ -22,7 +22,7 @@
                         Username
                     </label>
                     <input type="text" name="username" id="username" class="border border-gray-400 w-full p-2"
-                        value="{{ old('name') }}" required>
+                        value="{{ old('username') }}" required>
                     @error('username')
                         <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                     @enderror
@@ -33,7 +33,7 @@
                         Email
                     </label>
                     <input type="email" name="email" id="email" class="border border-gray-400 w-full p-2"
-                        value="{{ old('name') }}" required>
+                        value="{{ old('email') }}" required>
                     @error('email')
                         <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                     @enderror
