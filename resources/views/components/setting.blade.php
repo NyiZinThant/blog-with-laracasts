@@ -4,14 +4,14 @@
         {{ ucwords($heading) }}
     </h1>
     <div class="flex">
-        <aside class="w-48">
+        <aside class="w-48 flex-shrink-0">
             <h4 class="font-semibold mb-4">
                 Links
             </h4>
             <ul>
-                <li class="{{ request()->is('admin/dashboard') ? 'text-blue-500': '' }}">
-                    <a href="/admin/dashboard">
-                        Dashboard
+                <li class="{{ request()->is('admin/posts') ? 'text-blue-500': '' }}">
+                    <a href="/admin/posts">
+                        Manage Post
                     </a>
                 </li>
                 <li class="{{ request()->is('admin/post/create') ? 'text-blue-500': '' }}">

@@ -30,8 +30,10 @@
                                 </span>
                             </button>
                         </x-slot>
-                        <x-dropdown-item href="/admin/dashboard">Dashboard</x-dropdown-item>
-                        <x-dropdown-item href="/admin/post/create" :active='request()->is("admin/post/create")'>Create Post</x-dropdown-item>
+                        @admin
+                            <x-dropdown-item href="/admin/posts">Dashboard</x-dropdown-item>
+                            <x-dropdown-item href="/admin/post/create" :active='request()->is("admin/post/create")'>Create Post</x-dropdown-item>
+                        @endadmin
                         <x-dropdown-item  x-data="{}" @click.prevent="document.getElementById('logout-form').submit()">
                             Logout
                         </x-dropdown-item>

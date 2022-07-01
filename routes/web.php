@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminPostController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\SessionController;
@@ -40,6 +41,16 @@ Route::post("/logout", [SessionController::class, "destroy"])->middleware('auth'
 Route::post("/login", [SessionController::class, "store"])->middleware('guest');
 
 // Admin
-Route::get("/admin/post/create", [PostController::class, 'create'])->middleware('admin');
+Route::middleware('can:admin')->group(function () {
+    Route::get("/admin/posts", [AdminPostController::class, 'index']);
 
-Route::post("/admin/post", [PostController::class, 'store'])->middleware('admin');
+    Route::get("/admin/post/create", [AdminPostController::class, 'create']);
+
+    Route::post("/admin/post", [AdminPostController::class, 'store']);
+
+    Route::get("/admin/posts/{post}/edit", [AdminPostController::class, 'edit']);
+
+    Route::patch("/admin/posts/{post}", [AdminPostController::class, 'update']);
+
+    Route::delete("/admin/posts/{post}", [AdminPostController::class, 'destory']);
+});
